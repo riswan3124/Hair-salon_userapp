@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "813767617560",
+    "project_id": "hairsalon-b23af",
+    "storage_bucket": "hairsalon-b23af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813767617560:android:7242c7aed34380f8ae676d",
+        "android_client_info": {
+          "package_name": "com.example.hairsalon_prokit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIH1AWJGP8qYj-cyhzVk_3vgKCqM9UjX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,24 @@
+{
+  "stringTable": {},
+  "buildFiles": [
+    "/Users/riswanks/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/riswanks/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/riswanks/full_apps/9-hair_salon_prokit/hairsalon_prokit/android/app/.cxx/Debug/3n6j95a2/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/riswanks/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/riswanks/full_apps/9-hair_salon_prokit/hairsalon_prokit/android/app/.cxx/Debug/3n6j95a2/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {},
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}

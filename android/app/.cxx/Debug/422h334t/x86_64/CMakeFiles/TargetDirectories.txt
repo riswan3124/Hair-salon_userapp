@@ -1,0 +1,2 @@
+/Users/riswanks/full_apps/9-hair_salon_prokit/hairsalon_prokit/android/app/.cxx/Debug/422h334t/x86_64/CMakeFiles/edit_cache.dir
+/Users/riswanks/full_apps/9-hair_salon_prokit/hairsalon_prokit/android/app/.cxx/Debug/422h334t/x86_64/CMakeFiles/rebuild_cache.dir

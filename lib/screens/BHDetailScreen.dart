@@ -40,7 +40,7 @@ class BHDetailScreenState extends State<BHDetailScreen>
 
       if (doc.exists) {
         print("Document Data: ${doc.data()}"); // Debugging
-
+//Uses null-aware (??) operators to provide default values.
         setState(() {
           information = doc['information'] ?? 'No details available';
           contact = doc['contact'] ?? 'No contact available';
@@ -64,21 +64,24 @@ class BHDetailScreenState extends State<BHDetailScreen>
   late List<BHServicesModel> servicesList;
   late List<BHHairStyleModel> hairStyleList;
   late List<BHMakeUpModel> makeupList;
-
+//Calls changeStatusColor() to make the status bar transparent.
   @override
   void initState() {
     super.initState();
     changeStatusColor(Colors.transparent);
+    //Loads dummy data for gallery, categories, offers, services, hairstyles, and makeup.
     galleryList = getGalleryList();
     categoryList = getCategory();
     offerList = getOfferList();
     servicesList = getServicesList();
     hairStyleList = getHairStyleList();
     makeupList = getMakeupList();
+    //Calls fetchAboutDetails() to load salon details from Firestore.
     controller = TabController(length: 3, vsync: this);
     fetchAboutDetails();
   }
 
+//Updates the selected radio button when a service is chosen.
   void something(int? value) {
     setState(() {
       _radioValue1 = value;
@@ -88,6 +91,7 @@ class BHDetailScreenState extends State<BHDetailScreen>
   @override
   void dispose() {
     controller.dispose();
+    //Changes status bar color based on dark/light mode
     changeStatusColor(appStore.isDarkModeOn ? scaffoldDarkColor : white);
     super.dispose();
   }
@@ -110,12 +114,15 @@ class BHDetailScreenState extends State<BHDetailScreen>
                 backgroundColor: BHColorPrimary,
                 pinned: true,
                 expandedHeight: 300,
+                //Displays a background image.
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.parallax,
                   background:
                       Image.asset(BHDashedBoardImage6, fit: BoxFit.cover),
                   centerTitle: true,
                 ),
+                //Defines three tabs: About, Gallery, and Services.
+
                 bottom: TabBar(
                   controller: controller,
                   labelColor: whiteColor,
@@ -143,16 +150,17 @@ class BHDetailScreenState extends State<BHDetailScreen>
     );
   }
 
+//Uses StreamBuilder to listen for real-time updates from Firestore.
   Widget aboutWidget() {
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance
           .collection('about')
           .doc('details')
           .snapshots(),
+      // Shows a loading indicator while fetching data.
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-              child: CircularProgressIndicator()); // Loading indicator
+          return Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
@@ -162,7 +170,7 @@ class BHDetailScreenState extends State<BHDetailScreen>
         if (!snapshot.hasData || !snapshot.data!.exists) {
           return Center(child: Text("No details available"));
         }
-
+//Displays salon details inside infoCard() widgets.
         var doc = snapshot.data!;
         String information = doc['information'] ?? 'No details available';
         String contact = doc['contact'] ?? 'No contact available';
@@ -183,6 +191,7 @@ class BHDetailScreenState extends State<BHDetailScreen>
     );
   }
 
+//galleryWidget(): Displays images in a staggered grid layout.
   Widget galleryWidget() {
     return Padding(
       padding: EdgeInsets.all(16),
@@ -233,6 +242,7 @@ class BHDetailScreenState extends State<BHDetailScreen>
     );
   }
 
+//serviceWidget(): Lists services with booking options.
   Widget serviceCard(BHServicesModel service) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),

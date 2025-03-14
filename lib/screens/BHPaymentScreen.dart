@@ -6,11 +6,13 @@ import 'package:hairsalon_prokit/utils/BHColors.dart';
 import 'package:hairsalon_prokit/utils/BHImages.dart';
 import 'package:hairsalon_prokit/main.dart';
 import 'package:hairsalon_prokit/utils/BHWidgets.dart';
-
 import 'BHFinishedAppoScreen.dart';
 
 class BHPaymentScreen extends StatefulWidget {
-  static String tag = '/BookAppointmentScreen';
+  final String date;
+  final String time;
+
+  BHPaymentScreen({required this.date, required this.time});
 
   @override
   BookAppointmentScreenState createState() => BookAppointmentScreenState();
@@ -34,6 +36,7 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
               ? 'MasterCard'
               : 'Cash';
 
+      // Adding the appointment details to Firestore, including the selected time
       await _firestore.collection('appointments').add({
         'serviceName': 'Makeup Marguerite',
         'salonName': 'Conado Hair Studio',
@@ -42,9 +45,12 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
         'price': 25,
         'paymentMethod': paymentMethod,
         'status': 'Booked',
+        'date': widget.date,
+        'time': widget.time, // Storing the selected time here
         'timestamp': FieldValue.serverTimestamp(),
       });
 
+      // Show success dialog
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -54,10 +60,19 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                BHFinishedAppScreen().launch(context);
+                // Navigate to the finished screen and pass the date and time
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BHFinishedAppScreen(
+                      appointmentDate: widget.date, // Pass the date
+                      appointmentTime: widget.time, // Pass the time
+                    ),
+                  ),
+                );
               },
               child: Text('OK'),
-            )
+            ),
           ],
         ),
       );
@@ -141,7 +156,7 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
                       children: [
                         Text('Makeup Marguerite',
                             style: boldTextStyle(size: 14)),
-                        Text('1:30 - 2:30 PM',
+                        Text(widget.time,
                             style: primaryTextStyle(
                                 color: BHColorPrimary, size: 14)),
                       ],
@@ -162,135 +177,18 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('1:30-2:30 PM', style: primaryTextStyle(size: 14)),
-                        Text('June 15,2020', style: primaryTextStyle(size: 14)),
+                        Text(widget.time, style: primaryTextStyle(size: 14)),
+                        Text(widget.date, style: primaryTextStyle(size: 14)),
                         Text('\$25', style: boldTextStyle(size: 14)),
                       ],
-                    ),
-                    Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.only(top: 16),
-                      color: BHAppDividerColor,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Total Pay', style: boldTextStyle(size: 14)),
-                          Text('\$25', style: boldTextStyle(size: 14)),
-                        ],
-                      ),
                     ),
                   ],
                 ),
               ),
               16.height,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Payment Methods', style: boldTextStyle(size: 14)),
-                ],
-              ),
+              Text('Payment Methods', style: boldTextStyle(size: 14)),
               8.height,
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 8),
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: context.cardColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: BHGreyColor.withOpacity(0.3),
-                        offset: Offset(0.0, 1.0),
-                        blurRadius: 2.0),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset(BHVisaCardImg, height: 40, width: 40),
-                        16.width,
-                        Text('**** **** *123', style: boldTextStyle()),
-                      ],
-                    ),
-                    Radio(
-                      value: 0,
-                      groupValue: _radioValue1,
-                      activeColor: BHColorPrimary,
-                      onChanged: (dynamic value) => something(value),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: context.cardColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: BHGreyColor.withOpacity(0.3),
-                        offset: Offset(0.0, 1.0),
-                        blurRadius: 2.0)
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset(BHMasterCardImg, height: 40, width: 40),
-                        16.width,
-                        Text('**** **** *333', style: boldTextStyle()),
-                      ],
-                    ),
-                    Radio(
-                      value: 1,
-                      groupValue: _radioValue1,
-                      activeColor: BHColorPrimary,
-                      focusColor: BHAppTextColorSecondary,
-                      onChanged: (dynamic value) => something(value),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 8),
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: context.cardColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: BHGreyColor.withOpacity(0.3),
-                        offset: Offset(0.0, 1.0),
-                        blurRadius: 2.0),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        16.width,
-                        Text('Pay with cash', style: boldTextStyle()),
-                      ],
-                    ),
-                    Radio(
-                      value: 2,
-                      groupValue: _radioValue1,
-                      activeColor: BHColorPrimary,
-                      focusColor: BHAppTextColorSecondary,
-                      onChanged: (dynamic value) => something(value),
-                    ),
-                  ],
-                ),
-              ),
+              ..._buildPaymentMethods(),
               Container(
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.symmetric(vertical: 8),
@@ -304,13 +202,36 @@ class BookAppointmentScreenState extends State<BHPaymentScreen> {
                   onPressed: _confirmPayment,
                   child: Text(
                     'Confirm Payment',
-                    style: TextStyle(color: Colors.white ),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+// This function builds the list of payment options for the user to choose from.
+
+  List<Widget> _buildPaymentMethods() {
+    return [
+      _buildPaymentOption(BHVisaCardImg, '**** **** *123', 0),
+      _buildPaymentOption(BHMasterCardImg, '**** **** *333', 1),
+      _buildPaymentOption(null, 'Pay with cash', 2),
+    ];
+  }
+
+// This widget is used to display each payment option.
+  Widget _buildPaymentOption(String? image, String text, int value) {
+    return ListTile(
+      leading: image != null ? Image.asset(image, height: 40, width: 40) : null,
+      title: Text(text, style: boldTextStyle()),
+      trailing: Radio(
+        value: value,
+        groupValue: _radioValue1,
+        activeColor: BHColorPrimary,
+        onChanged: (dynamic val) => something(val),
       ),
     );
   }

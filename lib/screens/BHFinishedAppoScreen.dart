@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hairsalon_prokit/screens/BHAppointmentScreen.dart';
+import 'package:hairsalon_prokit/main.dart';
 import 'package:hairsalon_prokit/screens/BHDashedBoardScreen.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:hairsalon_prokit/utils/BHColors.dart';
 import 'package:hairsalon_prokit/utils/BHImages.dart';
-import 'package:hairsalon_prokit/main.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'BHPaymentScreen.dart'; // Make sure to import the screen where the user books an appointment
 
 class BHFinishedAppScreen extends StatefulWidget {
-  static String tag = '/FinishedScreen';
+  final String appointmentDate;
+  final String appointmentTime;
+
+  BHFinishedAppScreen(
+      {required this.appointmentDate, required this.appointmentTime});
 
   @override
   FinishedScreenState createState() => FinishedScreenState();
@@ -18,7 +22,7 @@ class FinishedScreenState extends State<BHFinishedAppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Appointment',
+        title: Text('Appointment Booked',
             style: boldTextStyle(color: BHAppTextColorPrimary)),
         centerTitle: true,
         iconTheme: IconThemeData(color: appStore.isDarkModeOn ? white : black),
@@ -49,66 +53,26 @@ class FinishedScreenState extends State<BHFinishedAppScreen> {
                     children: [
                       Text('Conado Hair Salon', style: boldTextStyle(size: 14)),
                       8.height,
-                      Row(
-                        children: [
-                          Icon(Icons.location_on,
-                              size: 14, color: BHAppTextColorSecondary),
-                          8.width,
-                          Text('301 Dorthy walks,chicago,Us.',
-                              style: secondaryTextStyle()),
-                        ],
-                      ),
-                      8.height,
-                      Text('146566311684641',
-                          style: secondaryTextStyle(size: 14)),
+                      Text('301 Dorothy Walks, Chicago, US',
+                          style: secondaryTextStyle())
                     ],
                   ),
+                  16.height,
+                  Text('Service: Makeup Marguerite',
+                      style: boldTextStyle(size: 14)),
                   8.height,
-                  Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.width,
-                      color: BHGreyColor.withOpacity(0.3)),
-                  8.height,
+                  Text('Stylist: Lettie Neal',
+                      style: secondaryTextStyle(size: 14)),
+                  16.height,
+                  Text('Date: ${widget.appointmentDate}',
+                      style: primaryTextStyle(size: 14)),
+                  Text('Time: ${widget.appointmentTime}',
+                      style: primaryTextStyle(size: 14)),
+                  16.height,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Hair Styling', style: boldTextStyle(size: 14)),
-                      Text('June 15,2020',
-                          style:
-                              boldTextStyle(color: BHColorPrimary, size: 14)),
-                    ],
-                  ),
-                  8.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.person,
-                              size: 14, color: BHAppTextColorSecondary),
-                          Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: Text('Lettie Neal',
-                                style: secondaryTextStyle()),
-                          ),
-                        ],
-                      ),
-                      Text('1:30 - 2:30 PM',
-                          style:
-                              boldTextStyle(color: BHColorPrimary, size: 14)),
-                    ],
-                  ),
-                  8.height,
-                  Container(
-                      height: 1,
-                      width: MediaQuery.of(context).size.width,
-                      color: BHGreyColor.withOpacity(0.3)),
-                  8.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Scan Barcode', style: boldTextStyle(size: 14)),
-                      Image.asset(BHBarCodeImg, height: 50, width: 120),
+                      Text('Price: \$25', style: boldTextStyle(size: 14)),
                     ],
                   ),
                   16.height,
@@ -116,58 +80,67 @@ class FinishedScreenState extends State<BHFinishedAppScreen> {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          // Buttons arranged vertically
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
+              mainAxisAlignment:
+                  MainAxisAlignment.start, // Align buttons vertically
+              crossAxisAlignment:
+                  CrossAxisAlignment.stretch, // Stretch buttons to full width
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(12),
-                      backgroundColor: BHColorPrimary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
+                // Go Back Button
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Go back to the previous screen
+                  },
+                  child: Text(
+                    'Go Back',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    backgroundColor: BHColorPrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BHDashedBoardScreen(),
-                        ),
-                      );
-                    },
-                    child: Text('Book more Appointment',
-                        style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold)),
                   ),
                 ),
-                8.height,
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(12),
-                      backgroundColor: context.cardColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          side: BorderSide(color: BHColorPrimary)),
+                SizedBox(height: 16), // Add space between buttons
+// Make More Appointment Button
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BHDashedBoardScreen(
+                            // You can pass default time or modify this part
+                            ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Make More Appointments',
+                    style: TextStyle(
+                        color: Colors.orangeAccent,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    backgroundColor: const Color.fromARGB(
+                        255, 255, 255, 255), // White background
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(
+                        color: Colors
+                            .orangeAccent, // Border color (orange in this case)
+                        width: 2, // Border width
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BHAppointmentScreen(),
-                        ),
-                      );
-                    },
-                    child: Text('Go to Appointment',
-                        style: TextStyle(
-                            color: BHColorPrimary,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],

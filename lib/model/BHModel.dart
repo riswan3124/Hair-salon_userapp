@@ -201,3 +201,42 @@ class BHDetailModel with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class AppointmentModel {
+  final String serviceName;
+  final String salonName;
+  final String location;
+  final String stylist;
+  final double price;
+  final String paymentMethod;
+  final String status;
+  final DateTime selectedDate;
+  final String selectedTimeSlot;
+
+  AppointmentModel({
+    required this.serviceName,
+    required this.salonName,
+    required this.location,
+    required this.stylist,
+    required this.price,
+    required this.paymentMethod,
+    required this.status,
+    required this.selectedDate,
+    required this.selectedTimeSlot,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'serviceName': serviceName,
+      'salonName': salonName,
+      'location': location,
+      'stylist': stylist,
+      'price': price,
+      'paymentMethod': paymentMethod,
+      'status': status,
+      'date': selectedDate.toIso8601String(),
+      'timeSlot': selectedTimeSlot,
+      'timestamp': DateTime.now().toIso8601String(),
+    };
+  }
+}

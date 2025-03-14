@@ -54,7 +54,8 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16), topLeft: Radius.circular(16)),
               color: appStore.isDarkModeOn ? scaffoldDarkColor : white,
             ),
             child: SingleChildScrollView(
@@ -70,19 +71,22 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
                         children: [
                           Text('\$100', style: primaryTextStyle()),
                           8.width,
-                          Text('\$89', style: boldTextStyle(color: BHColorPrimary)),
+                          Text('\$89',
+                              style: boldTextStyle(color: BHColorPrimary)),
                         ],
                       ),
                     ],
                   ),
                   8.height,
                   Divider(color: BHAppDividerColor),
-                  Text(BHTxtTimeOfEvent, style: boldTextStyle()).paddingOnly(top: 8, bottom: 16),
+                  Text(BHTxtTimeOfEvent, style: boldTextStyle())
+                      .paddingOnly(top: 8, bottom: 16),
                   Row(
                     children: [
                       Text('From', style: secondaryTextStyle()),
                       16.width,
-                      Text('7:30 AM - June 10,2020', style: primaryTextStyle(size: 14)),
+                      Text('7:30 AM - June 10,2020',
+                          style: primaryTextStyle(size: 14)),
                     ],
                   ),
                   16.height,
@@ -90,7 +94,8 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
                     children: [
                       Text('To', style: secondaryTextStyle(color: Colors.grey)),
                       35.width,
-                      Text('5:30 AM - June 25,2020', style: primaryTextStyle(size: 14)),
+                      Text('5:30 AM - June 25,2020',
+                          style: primaryTextStyle(size: 14)),
                     ],
                   ),
                   16.height,
@@ -106,27 +111,39 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: context.cardColor,
-                            boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), offset: Offset(0.0, 1.0), blurRadius: 2.0)],
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  offset: Offset(0.0, 1.0),
+                                  blurRadius: 2.0)
+                            ],
                           ),
                           child: Row(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
-                                child: commonCacheImageWidget(includeServiceList[index].serviceImg, 80, width: 80, fit: BoxFit.cover),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10)),
+                                child: commonCacheImageWidget(
+                                    includeServiceList[index].serviceImg, 80,
+                                    width: 80, fit: BoxFit.cover),
                               ),
                               8.width,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(includeServiceList[index].serviceName!, style: boldTextStyle()),
+                                  Text(includeServiceList[index].serviceName!,
+                                      style: boldTextStyle()),
                                   8.height,
                                   Row(
                                     children: [
-                                      Text(includeServiceList[index].time!, style: secondaryTextStyle()),
+                                      Text(includeServiceList[index].time!,
+                                          style: secondaryTextStyle()),
                                       8.width,
                                       Text(
                                         '\$${includeServiceList[index].price.toString()}',
-                                        style: boldTextStyle(color: BHColorPrimary),
+                                        style: boldTextStyle(
+                                            color: BHColorPrimary),
                                       ),
                                     ],
                                   ),
@@ -141,7 +158,8 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(12), backgroundColor: BHColorPrimary,
+                        padding: EdgeInsets.all(12),
+                        backgroundColor: BHColorPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -149,7 +167,8 @@ class BHPackageOffersScreenState extends State<BHPackageOffersScreen> {
                       onPressed: () {
                         BHBookAppointmentScreen().launch(context);
                       },
-                      child: Text(BHBtnBookAppointment, style: boldTextStyle(color: Colors.white)),
+                      child: Text(BHBtnBookAppointment,
+                          style: boldTextStyle(color: Colors.white)),
                     ),
                   ),
                   //16.height,

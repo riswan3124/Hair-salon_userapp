@@ -8,7 +8,6 @@ import 'package:hairsalon_prokit/utils/BHImages.dart';
 import 'BHAccountInformationScreen.dart';
 import 'BHInviteFriendsScreen.dart';
 import 'BHNotificationScreen.dart';
-import 'BHPaymentScreen.dart';
 
 class BHProfileScreen extends StatefulWidget {
   static String tag = '/ProfileScreen';
@@ -25,19 +24,22 @@ class BHProfileScreenState extends State<BHProfileScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           contentTextStyle: TextStyle(color: BHAppTextColorSecondary),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4))),
           actionsPadding: EdgeInsets.symmetric(horizontal: 16.0),
           title: Text(BHTxtLogoutDialog, style: boldTextStyle()),
           content: Text(BHTxtLogoutMsg, style: secondaryTextStyle()),
           actions: <Widget>[
             TextButton(
-              child: Text(BHBtnYes, style: TextStyle(color: Colors.blue, fontSize: 14)),
+              child: Text(BHBtnYes,
+                  style: TextStyle(color: Colors.blue, fontSize: 14)),
               onPressed: () {
                 finish(context);
               },
             ),
             TextButton(
-              child: Text(BHBtnNo, style: TextStyle(color: Colors.blue, fontSize: 14)),
+              child: Text(BHBtnNo,
+                  style: TextStyle(color: Colors.blue, fontSize: 14)),
               onPressed: () {},
             ),
           ],
@@ -59,7 +61,10 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                 children: [
                   Align(
                     alignment: Alignment.topCenter,
-                    child: CircleAvatar(backgroundImage: Image.network(BHdDashedBoardImage5).image, radius: 50),
+                    child: CircleAvatar(
+                        backgroundImage:
+                            Image.network(BHdDashedBoardImage5).image,
+                        radius: 50),
                   ),
                   8.height,
                   Text('Theresa Cohen', style: boldTextStyle()),
@@ -73,7 +78,10 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: context.cardColor,
                   boxShadow: [
-                    BoxShadow(color: BHGreyColor.withOpacity(0.3), offset: Offset(0.0, 1.0), blurRadius: 2.0),
+                    BoxShadow(
+                        color: BHGreyColor.withOpacity(0.3),
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 2.0),
                   ],
                 ),
                 padding: EdgeInsets.all(16.0),
@@ -108,19 +116,12 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                     4.height,
                     Row(
                       children: [
-                        Image.asset(BHPaymentIcon, height: 23, width: 23, color: BHColorPrimary),
+                        Image.asset(BHInformationIcon,
+                            height: 23, width: 23, color: BHColorPrimary),
                         8.width,
-                        Text(BHTxtPaymentMethods, style: secondaryTextStyle()).expand(),
-                      ],
-                    ).onTap(() {
-                      BHPaymentScreen().launch(context);
-                    }),
-                    16.height,
-                    Row(
-                      children: [
-                        Image.asset(BHInformationIcon, height: 23, width: 23, color: BHColorPrimary),
-                        8.width,
-                        Text(BHTxtAccountInformation, style: secondaryTextStyle()).expand(),
+                        Text(BHTxtAccountInformation,
+                                style: secondaryTextStyle())
+                            .expand(),
                       ],
                     ).onTap(() {
                       BHAccountInformationScreen().launch(context);
@@ -134,7 +135,10 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: context.cardColor,
                   boxShadow: [
-                    BoxShadow(color: BHGreyColor.withOpacity(0.3), offset: Offset(0.0, 1.0), blurRadius: 2.0),
+                    BoxShadow(
+                        color: BHGreyColor.withOpacity(0.3),
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 2.0),
                   ],
                 ),
                 padding: EdgeInsets.all(16.0),
@@ -142,9 +146,11 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                   children: [
                     Row(
                       children: [
-                        Image.asset(BHNotificationIcon, height: 23, width: 23, color: BHColorPrimary),
+                        Image.asset(BHNotificationIcon,
+                            height: 23, width: 23, color: BHColorPrimary),
                         8.width,
-                        Text(BHTxtNotification, style: secondaryTextStyle()).expand(),
+                        Text(BHTxtNotification, style: secondaryTextStyle())
+                            .expand(),
                       ],
                     ).onTap(() {
                       BHNotificationScreen().launch(context);
@@ -152,9 +158,11 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                     16.height,
                     Row(
                       children: [
-                        Image.asset(BHInviteFriendsIcon, height: 23, width: 23, color: BHColorPrimary),
+                        Image.asset(BHInviteFriendsIcon,
+                            height: 23, width: 23, color: BHColorPrimary),
                         8.width,
-                        Text(BHTxtInviteFriends, style: secondaryTextStyle()).expand(),
+                        Text(BHTxtInviteFriends, style: secondaryTextStyle())
+                            .expand(),
                       ],
                     ).onTap(() {
                       BHInviteFriendsScreen().launch(context);
@@ -162,17 +170,21 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                     16.height,
                     Row(
                       children: [
-                        Image.asset(BHSettingIcon, height: 23, width: 23, color: BHColorPrimary),
+                        Image.asset(BHSettingIcon,
+                            height: 23, width: 23, color: BHColorPrimary),
                         8.width,
-                        Text(BHTxtSetting, style: secondaryTextStyle()).expand(),
+                        Text(BHTxtSetting, style: secondaryTextStyle())
+                            .expand(),
                       ],
                     ).onTap(() {}),
                     16.height,
                     Row(
                       children: [
-                        Image.asset(BHTerms_and_ServicesIcon, height: 23, width: 23, color: BHColorPrimary),
+                        Image.asset(BHTerms_and_ServicesIcon,
+                            height: 23, width: 23, color: BHColorPrimary),
                         8.width,
-                        Text(BHTxtTermsOfServices, style: secondaryTextStyle()).expand(),
+                        Text(BHTxtTermsOfServices, style: secondaryTextStyle())
+                            .expand(),
                       ],
                     ).onTap(() {}),
                   ],
@@ -185,12 +197,16 @@ class BHProfileScreenState extends State<BHProfileScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: context.cardColor,
                   boxShadow: [
-                    BoxShadow(color: BHGreyColor.withOpacity(0.3), offset: Offset(0.0, 1.0), blurRadius: 2.0),
+                    BoxShadow(
+                        color: BHGreyColor.withOpacity(0.3),
+                        offset: Offset(0.0, 1.0),
+                        blurRadius: 2.0),
                   ],
                 ),
                 child: Row(
                   children: [
-                    Image.asset(BHLogoutIcon, height: 23, width: 23, color: BHColorPrimary),
+                    Image.asset(BHLogoutIcon,
+                        height: 23, width: 23, color: BHColorPrimary),
                     8.width,
                     Text(BHTxtLogout, style: secondaryTextStyle()).expand(),
                   ],

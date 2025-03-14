@@ -1,4 +1,4 @@
-# Ignore Flutter build files
+# Flutter build files
 .dart_tool/
 build/
 android/app/build/
@@ -8,3 +8,5 @@ ios/Pods/
 *.apk
 *.dill
 *.log
+*.lock
+pubspec.lock
